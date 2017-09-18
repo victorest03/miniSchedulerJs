@@ -48,6 +48,6 @@ gulp.task("serve",()=>{
 
 gulp.task("default",["CompileSass","minifycss","minifyjs","serve"],()=>{
     gulp.watch("./scss/**/*.scss",["CompileSass"]);
-    gulp.watch("./css/**/*.css",["minifycss"]);
-    gulp.watch("./js/**/*.js",["minifyjs"]);
+    gulp.watch(["./css/**/*.css", "!./css/**/*.min.css"],["minifycss"]);
+    gulp.watch(["./js/**/*.js","!./js/**/*.min.js"],["minifyjs"]);
 });1
