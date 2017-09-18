@@ -1,0 +1,355 @@
+
+.miniSheduler {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    width: 100%;
+    max-width: 100%;
+
+    .mns-toolbar {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 5px;
+        text-align: center;
+        overflow: auto;
+
+        .mns-left {
+            float: left;
+        }
+
+        .mns-center {
+            display: inline-block;
+            height: 100%;
+
+            h2 {
+                margin: 0;
+                font-weight: 600;
+                line-height: 35px;
+
+                @media (max-width: 750px) {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .mns-right {
+            float: right;
+        }
+    }
+
+    .mns-container {
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+
+        .mns-container-view {
+            width: 100%;
+            max-width: 100%;
+
+            & > table {
+                width: 100%;
+                max-width: 100%;
+                table-layout: fixed;
+                box-sizing: border-box;
+
+                col {
+                    width: 1px;
+
+                    &:first-child {
+                        width: 15%;
+                    }
+
+                    &:last-child {
+                        width: 75%;
+                    }
+
+                    @media (max-width: 750px) {
+                        &:first-child {
+                            width: 35%;
+                        }
+
+                        &:last-child {
+                            width: 65%;
+                        }
+                    }
+                }
+            }
+
+            table {
+                width: 100%;
+                max-width: 100%;
+
+                thead.mns-head, tbody.mns-body {
+                    .mns-divider {
+                        padding: 0 1px 0 0;
+                    }
+
+                    .mns-scroller {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                }
+
+                thead.mns-head {
+                    tr {
+                        th.mns-resource-area {
+                            vertical-align: middle;
+                            text-align: center;
+                            font-size: 1.2em;
+                        }
+
+                        th.mns-time-area {
+                            padding: 0px;
+
+                            & > table {
+                                border: 0;
+
+                                thead tr th.mns-year {
+                                    border-left-width: 0px;
+                                    border-bottom-width: 1px;
+                                    font-size: 1.3em;
+                                }
+                            }
+
+                            & > .mns-scroller {
+                                overflow-x: hidden;
+
+                                .mns-content {
+                                    min-width: 1114px;
+
+                                    & > table {
+                                        border-left: 0;
+                                        border-top: 0;
+                                        border-bottom: 0;
+
+                                        thead {
+                                            tr {
+                                                th.mns-days {
+                                                    border-bottom: 0;
+
+                                                    &:first-child {
+                                                        border-left: 0;
+                                                    }
+
+                                                    .mns-day {
+                                                        min-width: 139px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                tbody.mns-body {
+                    tr {
+                        td.mns-resource-area, td.mns-time-area {
+                            padding: 0;
+                            border: 0;
+
+                            .mns-scroller {
+                                .mns-scroller-inner {
+                                    .mns-content .mns-rows {
+                                        table {
+                                            border-left: 0;
+
+                                            tbody {
+                                                tr td {
+                                                    padding: 5px 8px;
+                                                    border-left: 0;
+
+                                                    .mns-row:first-child {
+                                                        border-left: 0;
+                                                    }
+
+                                                    .mns-row {
+                                                        min-height: 17px;
+
+                                                        .time-area-item {
+                                                            background: #224467;
+                                                            color: #ffffff;
+                                                            text-align: center;
+                                                            border-radius: 20px;
+                                                            font-size: 12px;
+                                                            font-weight: bold;
+                                                            margin-bottom: 1px;
+                                                            cursor: pointer;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        td.mns-time-area {
+                            .mns-scroller > .mns-scroller-inner > .mns-content {
+                                min-width: 1114px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mns-btn,.mns-btn-group{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .mns-btn-group{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        &>.mns-btn:first-child:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &>.mns-btn:last-child:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        &>.mns-btn:first-child {
+            margin-left: 0;
+        }
+
+        &>.mns-btn{
+            position: relative;
+            float: left;
+        }
+    }
+
+    .mns-btn{
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        &:hover{
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+            text-decoration: none;
+        }
+
+        &.active{
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+            background-image: none;
+            outline: 0;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+            box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        }
+    }
+
+    .table{
+        
+        width: 100%;
+        max-width: 100%;
+        background-color: transparent;
+        border-spacing: 0;
+        border-collapse: collapse;
+        &>thead>tr>th{
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        &>thead:first-child>tr:first-child>th{
+            border-top: 0;
+        }
+
+        &>tbody>tr>td{
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        &.table-bordered{
+            border: 1px solid #ddd;
+            &>thead>tr>th{
+                border-bottom-width: 2px;
+                border: 1px solid #ddd;
+            }
+
+            &>tbody>tr>td{
+                border: 1px solid #ddd;
+            }
+        }
+
+        th{
+            text-align: center;   
+        }
+    }
+
+    .mns-arrow-left,.mns-arrow-right{
+        display: block;
+        width: 15px;
+        height: 20px;
+        &:before{
+            position: absolute;
+            display:block; 
+            border:5px solid #333; 
+            height: 9px;
+            width: 9px;
+            top: 9px;
+        }
+    }
+
+    .mns-arrow-left{
+        &:before{
+            content:''; 
+            border-right-width:0;
+            border-bottom-width:0;
+            transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -o-transform:rotate(-45deg);
+            -ms-transform:rotate(-45deg);
+            left: 15px;
+        }
+    }
+
+    .mns-arrow-right{
+        &:before{
+            content:'';
+            border-left-width:0; 
+            border-top-width:0; 
+            transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -o-transform:rotate(-45deg);
+            -ms-transform:rotate(-45deg); 
+            right: 15px;
+        }
+    }
+}
