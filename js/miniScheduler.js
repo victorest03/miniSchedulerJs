@@ -229,6 +229,17 @@ $.fn.extend({
                         }
                     });
                     contendTd.append(contendRow);
+                    if(value.footer){
+                        $.each(value.footer, function (id, val) {
+                            if (rangeDateVisible[i].getDate() === val.date.getDate() && rangeDateVisible[i].getMonth() === val.date.getMonth() && rangeDateVisible[i].getFullYear() === val.date.getFullYear()) {
+                                let f = $(`<div class="mns-row-pie">${val.contend}</div>`);
+                                if(val.background) f.css({background: val.background})
+                                if(val.color) f.css({color: val.color})
+                                contendTd.append(f)
+                            }
+                        });
+                    }
+                    
                     contendTr.append(contendTd);
                 }
     
@@ -272,10 +283,11 @@ $.fn.extend({
                 var maxHeight = 0;
                 $(`td>.mns-area-row-${i}`).css("height", "auto");
                 $.each($(`td>.mns-area-row-${i}`), function (i2, e2) {
-                    if (maxHeight < $(e2).height())
-                        maxHeight = $(e2).height();
+                    if (maxHeight < $(e2).parent().height())
+                        maxHeight = $(e2).parent().height();
+                    $(e2).css("height", `${$(e2).next(".mns-row-pie").length !== 0 ? "calc(100% - 25px)":"100%"}`);
                 });
-                $(`td>.mns-area-row-${i}`).height(maxHeight);
+                $(`td>.mns-area-row-${i}`).parent().height(maxHeight);
             });
             
         }

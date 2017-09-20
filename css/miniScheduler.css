@@ -152,7 +152,7 @@
 }
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td {
-  padding: 5px 8px;
+  padding: 0;
   border-left: 0;
 }
 
@@ -162,6 +162,7 @@
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row {
   min-height: 17px;
+  padding: 5px 8px;
 }
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item {
@@ -173,6 +174,12 @@
   font-weight: bold;
   margin-bottom: 1px;
   cursor: pointer;
+}
+
+.miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row-pie, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row-pie {
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding: 2px 0;
 }
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller > .mns-scroller-inner > .mns-content {
