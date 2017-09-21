@@ -1,16 +1,10 @@
 $(function(){
     var miniSheduler = $("#calendario").miniSheduler({
         ajax:{
-            url:"./data.json"
+            url:"/data.json"
         },
         onClick:function(data){
             console.log(data)
-        },
-        icons:{
-            arrow:{
-                left:"icon-left",
-                right:"icon-right"
-            }
         }
     })
 
@@ -18,11 +12,7 @@ $(function(){
         miniSheduler.destroy();
     })
 
-    $("#reload").on("click",()=>{
-        miniSheduler.load.url("/data2.json");
-    })
-
     $("#update").on("click",()=>{
-        miniSheduler.load.update();
+        miniSheduler.load.update("&pk=" + 5);
     })
 })

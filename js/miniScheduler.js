@@ -123,6 +123,7 @@ $.fn.extend({
         
         $mnsToolbar.find(".btnToday").on("click", function () {
             changeView();
+            ajaxRequest()
             loadData();
         });
     
@@ -135,6 +136,7 @@ $.fn.extend({
             }
             
             changeView(d);
+            ajaxRequest()
             loadData();
         });
     
@@ -146,21 +148,25 @@ $.fn.extend({
                 d.setDate(d.getDate() - 7);
             }
             changeView(d);
+            ajaxRequest()
             loadData();
         });
     
         $mnsToolbar.find(".btnChangeView").on("click", function () {
             var $this = $(this);
-            $mnsToolbar.find(".btnChangeView").removeClass("active");
-            $this.addClass("active");
-    
-            if ($this.hasClass("btnMonthViewMode")) {
-                modeView = "month";
-            } else if ($this.hasClass("btnWeekViewMode")) {
-                modeView = "week";
+            if(!$this.hasClass("active")){
+                $mnsToolbar.find(".btnChangeView").removeClass("active");
+                $this.addClass("active");
+        
+                if ($this.hasClass("btnMonthViewMode")) {
+                    modeView = "month";
+                } else if ($this.hasClass("btnWeekViewMode")) {
+                    modeView = "week";
+                }
+                changeView();
+                ajaxRequest()
+                loadData();
             }
-            changeView();
-            loadData();
         });
     
         $("body").on("click", ".time-area-item", function () {
@@ -218,9 +224,9 @@ $.fn.extend({
             });
         }
 
-        function ajaxRequest(){
+        function ajaxRequest(parmt){
             $.ajax({
-                url: ajaxUrl,
+                url: `${ajaxUrl}?start=${rangeDateVisible[0].getFullYear()}-${rangeDateVisible[0].getMonth() + 1}-${rangeDateVisible[0].getDate()}&end=${rangeDateVisible[rangeDateVisible.length - 1].getFullYear()}-${rangeDateVisible[rangeDateVisible.length - 1].getMonth() + 1}-${rangeDateVisible[rangeDateVisible.length - 1].getDate()}${parmt ? parmt:""}`,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -341,6 +347,7 @@ $.fn.extend({
     
         function initial() {
             modeView = defaultConfig.mode;
+            changeView();
             if(parameters.ajax.data) customData = parameters.ajax.data;
             else if(parameters.ajax.url && parameters.ajax.url.length !== 0){
                 ajaxUrl = parameters.ajax.url;
@@ -356,7 +363,7 @@ $.fn.extend({
             
             defaultConfig.draggable = parameters.draggable;
             defaultConfig.onClick = parameters.onClick;
-            changeView();
+            
             loadData();
         }
     
@@ -367,16 +374,12 @@ $.fn.extend({
                 $miniSheduler.html("");
             },
             load:{
-                url:function(url){
-                    ajaxUrl = url
-                    ajaxRequest()
-                },
                 data:function(dataReload){
                     customData = dataReload;
                     loadData();
                 },
-                update:function(){
-                    ajaxRequest();
+                update:function(parmt){
+                    ajaxRequest(parmt);
                 }
             }
         }
