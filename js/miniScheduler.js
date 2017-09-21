@@ -346,6 +346,13 @@ $.fn.extend({
                 ajaxUrl = parameters.ajax.url;
                 ajaxRequest();
             }
+
+            if(parameters.icons){
+                if(parameters.icons.arrow){
+                    $mnsToolbar.find("i.mns-arrow-left").attr("class",parameters.icons.arrow.left)
+                    $mnsToolbar.find("i.mns-arrow-right").attr("class",parameters.icons.arrow.right)
+                }
+            }
             
             defaultConfig.draggable = parameters.draggable;
             defaultConfig.onClick = parameters.onClick;

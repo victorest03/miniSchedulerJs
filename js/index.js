@@ -5,6 +5,12 @@ $(function(){
         },
         onClick:function(data){
             console.log(data)
+        },
+        icons:{
+            arrow:{
+                left:"icon-left",
+                right:"icon-right"
+            }
         }
     })
 
