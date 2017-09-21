@@ -3,7 +3,7 @@ var drag, drop, allowDrop;
 $.fn.extend({
     miniSheduler: function(parameters) {
         
-        var rangeDateVisible,modeView;
+        var rangeDateVisible,modeView,ajaxUrl;
         var customData = [];
         var defaultConfig = {
             mode: "week",
@@ -13,7 +13,8 @@ $.fn.extend({
                 dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
                 dayNamesShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
                 dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"]
-            }
+            },
+            draggable: false
         }
 
         const $miniSheduler = $(this).addClass("miniSheduler");
@@ -163,8 +164,19 @@ $.fn.extend({
         });
     
         $("body").on("click", ".time-area-item", function () {
-            const $thisId = $(this).attr("id");
-            console.log(customData[$thisId.split("-")[3]].data[$thisId.split("-")[4]]);
+            let $thisId = $(this).attr("id");
+            let indexRow = $thisId.split("-")[3];
+            let indexItem = $thisId.split("-")[4];
+            
+            let dataItem = {
+                name: customData[indexRow].name,
+                extra: customData[indexRow].extra,
+                item: customData[indexRow].data[indexItem]
+            }
+
+            if(defaultConfig.onClick){
+                defaultConfig.onClick(dataItem);
+            }
         });
     
         function changeView(requireDate) {
@@ -205,6 +217,18 @@ $.fn.extend({
                 $(value).find(".mns-day").html(fs);
             });
         }
+
+        function ajaxRequest(){
+            $.ajax({
+                url: ajaxUrl,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    customData = data;
+                    loadData();
+                }
+            });
+        }
     
         function loadData() {
             $mnsBodyMnsResourceArea.find("table>tbody").html("");
@@ -222,16 +246,18 @@ $.fn.extend({
     
                 for (let i = 0; i < rangeDateVisible.length; i++) {
                     var contendTd = $("<td>");
-                    var contendRow = $(`<div class="mns-row mns-area-row-${index}" ondrop="drop(event)" ondragover="allowDrop(event)">`);
+                    var contendRow = $(`<div class="mns-row mns-area-row-${index}" ${defaultConfig.draggable ? 'ondrop="drop(event)" ondragover="allowDrop(event)"':''}>`);
                     $.each(value.data, function (id, val) {
-                        if (rangeDateVisible[i].getDate() === val.date.getDate() && rangeDateVisible[i].getMonth() === val.date.getMonth() && rangeDateVisible[i].getFullYear() === val.date.getFullYear()) {
-                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${i}' draggable='true' ondragstart="drag(event)">${val.info}</div>`);
+                        let dateCustom = new Date(val.date);
+                        if (rangeDateVisible[i].getDate() === dateCustom.getDate() && rangeDateVisible[i].getMonth() === dateCustom.getMonth() && rangeDateVisible[i].getFullYear() === dateCustom.getFullYear()) {
+                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${id}' ${defaultConfig.draggable ? 'draggable="true" ondragstart="drag(event)"':''}>${val.info}</div>`);
                         }
                     });
                     contendTd.append(contendRow);
                     if(value.footer){
                         $.each(value.footer, function (id, val) {
-                            if (rangeDateVisible[i].getDate() === val.date.getDate() && rangeDateVisible[i].getMonth() === val.date.getMonth() && rangeDateVisible[i].getFullYear() === val.date.getFullYear()) {
+                            let dateCustom = new Date(val.date);
+                            if (rangeDateVisible[i].getDate() === dateCustom.getDate() && rangeDateVisible[i].getMonth() === dateCustom.getMonth() && rangeDateVisible[i].getFullYear() === dateCustom.getFullYear()) {
                                 let f = $(`<div class="mns-row-pie">${val.contend}</div>`);
                                 if(val.background) f.css({background: val.background})
                                 if(val.color) f.css({color: val.color})
@@ -314,14 +340,38 @@ $.fn.extend({
         }
     
         function initial() {
-    
             modeView = defaultConfig.mode;
-            customData = parameters.customData;
+            if(parameters.ajax.data) customData = parameters.ajax.data;
+            else if(parameters.ajax.url && parameters.ajax.url.length !== 0){
+                ajaxUrl = parameters.ajax.url;
+                ajaxRequest();
+            }
             
+            defaultConfig.draggable = parameters.draggable;
+            defaultConfig.onClick = parameters.onClick;
             changeView();
             loadData();
         }
     
         initial();
+
+        return {
+            destroy : function(){
+                $miniSheduler.html("");
+            },
+            load:{
+                url:function(url){
+                    ajaxUrl = url
+                    ajaxRequest()
+                },
+                data:function(dataReload){
+                    customData = dataReload;
+                    loadData();
+                },
+                update:function(){
+                    ajaxRequest();
+                }
+            }
+        }
     }
   });
