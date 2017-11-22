@@ -5,7 +5,8 @@
             {
                 "date": "2017-11-21T00:00:00.00",
                 "info": "OT201711490",
-                "background": "red"
+                "background": "red",
+                "color": "yellow"
             },
             {
                 "date": "2017-11-20T00:00:00.00",

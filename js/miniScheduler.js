@@ -311,7 +311,7 @@ $.fn.extend({
                     $.each(value.data, function (id, val) {
                         let dateCustom = new Date(val.date);
                         if (rangeDateVisible[i].getDate() === dateCustom.getDate() && rangeDateVisible[i].getMonth() === dateCustom.getMonth() && rangeDateVisible[i].getFullYear() === dateCustom.getFullYear()) {
-                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${id}' ${val.background ? `style="background: ${val.background};"`:''} ${defaultConfig.draggable ? 'draggable="true" ondragstart="drag(event)"':''}>${val.info}</div>`);
+                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${id}' ${val.background || val.color  ? `style="${val.background ? `background: ${val.background};`:""}${val.color ? `color: ${val.color};`:""}"`:''} ${defaultConfig.draggable ? 'draggable="true" ondragstart="drag(event)"':''}>${val.info}</div>`);
                         }
                     });
                     contendTd.append(contendRow);
