@@ -5,6 +5,12 @@ $(function(){
         },
         onClick:function(data){
             console.log(data)
+        },
+        tooltip:{
+            background: "yellow",
+            content:function(data){
+                return `<div>${data.item.date}</div>`;
+            }
         }
     })
 

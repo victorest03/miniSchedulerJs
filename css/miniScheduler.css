@@ -342,3 +342,20 @@
   -ms-transform: rotate(-45deg);
   right: 15px;
 }
+
+.mns-tooltip {
+  position: absolute;
+  width: 150px;
+  height: 80px;
+  background: yellow;
+}
+
+.mns-tooltip::after {
+  content: "";
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid yellow;
+  top: -10px;
+  left: calc(50% - 10px);
+}

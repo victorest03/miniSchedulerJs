@@ -168,7 +168,7 @@ $.fn.extend({
                 loadData();
             }
         });
-    
+
         $("body").on("click", ".time-area-item", function () {
             let $thisId = $(this).attr("id");
             let indexRow = $thisId.split("-")[3];
@@ -184,7 +184,31 @@ $.fn.extend({
                 defaultConfig.onClick(dataItem);
             }
         });
-    
+
+        $(document).on("mouseenter", ".time-area-item", function (e) {
+            let $this = $(this);
+            let $thisId = $(this).attr("id");
+            let indexRow = $thisId.split("-")[3];
+            let indexItem = $thisId.split("-")[4];
+            let dataItem = {
+                name: customData[indexRow].name,
+                extra: customData[indexRow].extra,
+                item: customData[indexRow].data[indexItem]
+            }
+
+            if(defaultConfig.tooltip){
+                var pos = $this.position();
+                var $div = $("<div class='mns-tooltip'>").css({
+                    "left":pos.left + (($this.width() - 150) / 2) + 'px',
+                    "top": pos.top + 17 + 8 + 'px'
+                }).html(defaultConfig.tooltip.content(dataItem)).appendTo(document.body);
+            }
+        });
+
+        $(document).on("mouseleave", ".time-area-item", function (e) {
+            $(".mns-tooltip").remove();
+        });
+
         function changeView(requireDate) {
             rangeDateVisible = getRangeWeektoDate(requireDate);
             var fs = "";
@@ -363,7 +387,7 @@ $.fn.extend({
             
             defaultConfig.draggable = parameters.draggable;
             defaultConfig.onClick = parameters.onClick;
-            
+            defaultConfig.tooltip = parameters.tooltip;
             loadData();
         }
     
