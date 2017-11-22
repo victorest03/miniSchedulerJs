@@ -131,15 +131,14 @@ $.fn.extend({
         });
         
         $mnsToolbar.find(".btnToday").on("click", function () {
-            $mnsloadview.toggleClass("active");
+            $mnsloadview.addClass("active");
             changeView();
             ajaxRequest()
             loadData();
-            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnBeforeWeek").on("click", function () {
-            $mnsloadview.toggleClass("active");
+            $mnsloadview.addClass("active");
             const d = rangeDateVisible[0];
             if(modeView === "month"){
                 d.setMonth(d.getMonth() + 1);
@@ -150,11 +149,10 @@ $.fn.extend({
             changeView(d);
             ajaxRequest()
             loadData();
-            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnAfterWeek").on("click", function () {
-            $mnsloadview.toggleClass("active");
+            $mnsloadview.addClass("active");
             const d = rangeDateVisible[0];
             if(modeView === "month"){
                 d.setMonth(d.getMonth() - 1);
@@ -164,13 +162,12 @@ $.fn.extend({
             changeView(d);
             ajaxRequest()
             loadData();
-            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnChangeView").on("click", function () {
             var $this = $(this);
             if(!$this.hasClass("active")){
-                $mnsloadview.toggleClass("active");
+                $mnsloadview.addClass("active");
                 $mnsToolbar.find(".btnChangeView").removeClass("active");
                 $this.addClass("active");
         
@@ -181,8 +178,6 @@ $.fn.extend({
                 }
                 changeView();
                 ajaxRequest()
-                loadData();
-                $mnsloadview.toggleClass("active");
             }
         });
 
@@ -287,6 +282,7 @@ $.fn.extend({
                 success: function (data) {
                     customData = data;
                     loadData();
+                    $mnsloadview.removeClass("active");
                 }
             });
         }
@@ -401,6 +397,7 @@ $.fn.extend({
         }
     
         function initial() {
+            $mnsloadview.addClass("active");
             modeView = defaultConfig.mode;
             changeView();
             if(parameters.ajax.data) customData = parameters.ajax.data;
@@ -419,7 +416,7 @@ $.fn.extend({
             defaultConfig.draggable = parameters.draggable;
             defaultConfig.onClick = parameters.onClick;
             defaultConfig.tooltip = parameters.tooltip;
-            loadData();
+            //loadData();
         }
     
         initial();
