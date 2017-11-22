@@ -5,6 +5,8 @@
   color: #333;
   width: 100%;
   max-width: 100%;
+  z-index: 1;
+  position: relative;
 }
 
 .miniSheduler .mns-toolbar {
@@ -343,19 +345,62 @@
   right: 15px;
 }
 
-.mns-tooltip {
+.miniSheduler .mns-tooltip {
   position: absolute;
-  width: 150px;
-  height: 80px;
-  background: yellow;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
 }
 
-.mns-tooltip::after {
-  content: "";
+.miniSheduler .mns-tooltip > .mns-tooltip-arrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ff0;
+  margin-left: calc(50% - 8px);
+  width: 0;
+}
+
+.miniSheduler .mns-tooltip > .mns-tooltip-body {
+  display: block;
+  height: auto;
+  background: yellow;
+  padding: 5px;
+  border-radius: 7px;
+}
+
+.miniSheduler .mns-tooltip.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.miniSheduler .mns-loadview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: absolute;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid yellow;
-  top: -10px;
-  left: calc(50% - 10px);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition-duration: .2s;
+          transition-duration: .2s;
+  margin: 0 auto;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.9);
+  font-size: 1.5em;
+  color: #fff;
+}
+
+.miniSheduler .mns-loadview.active {
+  visibility: visible;
+  opacity: 1;
 }

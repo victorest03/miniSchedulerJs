@@ -117,17 +117,29 @@ $.fn.extend({
         const $mnsBodyMnsResourceArea = $mnsBody.find(".mns-resource-area");
         const $mnsBodyMnsTimeArea = $mnsBody.find(".mns-time-area");
 
+        const $mnstooltip = $(`<div class='mns-tooltip'>
+                                    <div class="mns-tooltip-arrow"></div>
+                                    <div class="mns-tooltip-body"></div>
+                            </div>`).appendTo($miniSheduler);
+        const $mnstooltipbody = $mnstooltip.find(".mns-tooltip-body")
+        const $mnstooltiparrow = $mnstooltip.find(".mns-tooltip-arrow")
+
+        const $mnsloadview = $(`<div class='mns-loadview'>Cargando...</div>`).appendTo($miniSheduler);
+
         $mnsBodyMnsTimeArea.find(".mns-scroller").on("scroll", function () {
             $mnsHeadMnsTimeArea.find(".mns-scroller").scrollLeft($(this).scrollLeft());
         });
         
         $mnsToolbar.find(".btnToday").on("click", function () {
+            $mnsloadview.toggleClass("active");
             changeView();
             ajaxRequest()
             loadData();
+            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnBeforeWeek").on("click", function () {
+            $mnsloadview.toggleClass("active");
             const d = rangeDateVisible[0];
             if(modeView === "month"){
                 d.setMonth(d.getMonth() + 1);
@@ -138,9 +150,11 @@ $.fn.extend({
             changeView(d);
             ajaxRequest()
             loadData();
+            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnAfterWeek").on("click", function () {
+            $mnsloadview.toggleClass("active");
             const d = rangeDateVisible[0];
             if(modeView === "month"){
                 d.setMonth(d.getMonth() - 1);
@@ -150,11 +164,13 @@ $.fn.extend({
             changeView(d);
             ajaxRequest()
             loadData();
+            $mnsloadview.toggleClass("active");
         });
     
         $mnsToolbar.find(".btnChangeView").on("click", function () {
             var $this = $(this);
             if(!$this.hasClass("active")){
+                $mnsloadview.toggleClass("active");
                 $mnsToolbar.find(".btnChangeView").removeClass("active");
                 $this.addClass("active");
         
@@ -166,6 +182,7 @@ $.fn.extend({
                 changeView();
                 ajaxRequest()
                 loadData();
+                $mnsloadview.toggleClass("active");
             }
         });
 
@@ -198,15 +215,29 @@ $.fn.extend({
 
             if(defaultConfig.tooltip){
                 var pos = $this.position();
-                var $div = $("<div class='mns-tooltip'>").css({
-                    "left":pos.left + (($this.width() - 150) / 2) + 'px',
-                    "top": pos.top + 17 + 8 + 'px'
-                }).html(defaultConfig.tooltip.content(dataItem)).appendTo(document.body);
+                $mnstooltip.css({
+                    "left":pos.left + (($this.width() - parseInt(defaultConfig.tooltip.width, 10)) / 2) + 'px',
+                    "top": pos.top + 17 + 'px'
+                });
+
+                $mnstooltiparrow.css({
+                    "border-bottom-color": defaultConfig.tooltip.background
+                })
+
+                $mnstooltipbody.css({
+                    "width": defaultConfig.tooltip.width,
+                    "font-size": defaultConfig.tooltip.fontSize,
+                    "background": defaultConfig.tooltip.background,
+                    "color": defaultConfig.tooltip.color
+                })
+
+                $mnstooltipbody.html(defaultConfig.tooltip.content(dataItem));
+                $mnstooltip.toggleClass("active");
             }
         });
 
         $(document).on("mouseleave", ".time-area-item", function (e) {
-            $(".mns-tooltip").remove();
+            $mnstooltip.toggleClass("active");
         });
 
         function changeView(requireDate) {
@@ -280,7 +311,7 @@ $.fn.extend({
                     $.each(value.data, function (id, val) {
                         let dateCustom = new Date(val.date);
                         if (rangeDateVisible[i].getDate() === dateCustom.getDate() && rangeDateVisible[i].getMonth() === dateCustom.getMonth() && rangeDateVisible[i].getFullYear() === dateCustom.getFullYear()) {
-                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${id}' ${defaultConfig.draggable ? 'draggable="true" ondragstart="drag(event)"':''}>${val.info}</div>`);
+                            contendRow.append(`<div class='time-area-item' id='time-area-item-${index}-${id}' ${val.background ? `style="background: ${val.background};"`:''} ${defaultConfig.draggable ? 'draggable="true" ondragstart="drag(event)"':''}>${val.info}</div>`);
                         }
                     });
                     contendTd.append(contendRow);

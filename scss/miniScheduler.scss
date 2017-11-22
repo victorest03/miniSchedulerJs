@@ -6,7 +6,8 @@
     color: #333;
     width: 100%;
     max-width: 100%;
-
+    z-index: 1;
+    position: relative;
     .mns-toolbar {
         width: 100%;
         max-width: 100%;
@@ -358,21 +359,57 @@
             right: 15px;
         }
     }
-}
 
-.mns-tooltip{
-    position: absolute;
-    width: 150px;
-    height: 80px;
-    background: yellow;
-
-    &::after{
-        content: "";
+    .mns-tooltip{
         position: absolute;
-        border-left:10px solid transparent;
-        border-right:10px solid transparent;
-        border-bottom:10px solid yellow;
-        top: -10px;
-        left: calc(50% - 10px);  
+        opacity: 0;
+        visibility: hidden;
+        transition-duration: .5s;
+        &>.mns-tooltip-arrow{
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #ff0;
+            margin-left: calc(50% - 8px);
+            width: 0;
+        }
+    
+        &>.mns-tooltip-body{
+            display: block;
+            height: auto;
+            background: yellow;
+            padding: 5px;
+            border-radius: 7px;
+            
+        }
+    
+        &.active{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .mns-loadview{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition-duration: .2s;
+        margin: 0 auto;
+        z-index: 10;
+        background: rgba(0,0,0,.9);
+        font-size: 1.5em;
+        color: #fff;
+        
+        &.active{
+            visibility: visible;
+            opacity: 1;
+        }
     }
 }
+
