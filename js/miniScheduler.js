@@ -198,6 +198,7 @@ $.fn.extend({
         });
 
         $(document).on("mouseenter", ".time-area-item", function (e) {
+            $mnstooltip.removeClass("active");
             let $this = $(this);
             let $thisId = $(this).attr("id");
             let indexRow = $thisId.split("-")[3];
@@ -227,12 +228,12 @@ $.fn.extend({
                 })
 
                 $mnstooltipbody.html(defaultConfig.tooltip.content(dataItem));
-                $mnstooltip.toggleClass("active");
+                $mnstooltip.addClass("active");
             }
         });
 
         $(document).on("mouseleave", ".time-area-item", function (e) {
-            $mnstooltip.toggleClass("active");
+            $mnstooltip.removeClass("active");
         });
 
         function changeView(requireDate) {
