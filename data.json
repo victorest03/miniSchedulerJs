@@ -3,23 +3,23 @@
         "name": "Jose Terronez",
         "data": [
             {
-                "date": "2017-11-21T00:00:00.00",
-                "info": "OT201711490",
+                "date": "2018-10-21T00:00:00.00",
+                "info": "<p>OT201711490</p><p>Nombre del Cliente</p><p>Nombre de la Sucursal si es muy grande</p><p>Equipo 0001</p><p>VF84515D</p>",
                 "background": "red",
                 "color": "yellow"
             },
             {
-                "date": "2017-11-20T00:00:00.00",
-                "info": "OT201711433"
+                "date": "2018-10-20T00:00:00.00",
+                "info": "<p>OT201711490</p><p>Nombre del Cliente</p><p>Nombre de la Sucursal si es muy grande</p><p>Equipo 0001</p><p>VF84515D</p>"
             },
             {
-                "date": "2017-11-21T00:00:00.00",
-                "info": "OT201711666"
+                "date": "2018-10-29T00:00:00.00",
+                "info": "<p>OT201711490</p><p>Nombre del Cliente</p><p>Nombre de la Sucursal si es muy grande</p><p>Equipo 0001</p><p>VF84515D</p>"
             }
         ],
         "footer":[
             {
-                "date": "2017-11-21T00:00:00.00",
+                "date": "2018-10-29T00:00:00.00",
                 "contend": "4h 50min"
             }
         ],

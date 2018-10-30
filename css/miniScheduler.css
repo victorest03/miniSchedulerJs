@@ -1,3 +1,8 @@
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .miniSheduler {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
@@ -152,6 +157,7 @@
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table {
   border-left: 0;
+  table-layout: fixed;
 }
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td {
@@ -171,12 +177,22 @@
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item {
   background: #224467;
   color: #ffffff;
-  text-align: center;
-  border-radius: 20px;
+  text-align: left;
+  border-radius: 5px;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 1px;
+  padding: 3px;
   cursor: pointer;
+}
+
+.miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item > p, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row .time-area-item > p {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
 }
 
 .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-resource-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row-pie, .miniSheduler .mns-container .mns-container-view table tbody.mns-body tr td.mns-time-area .mns-scroller .mns-scroller-inner .mns-content .mns-rows table tbody tr td .mns-row-pie {

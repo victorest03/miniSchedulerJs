@@ -1,4 +1,6 @@
-
+*, *::after, *::before{
+    box-sizing: border-box;
+}
 .miniSheduler {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -159,7 +161,7 @@
                                     .mns-content .mns-rows {
                                         table {
                                             border-left: 0;
-
+                                            table-layout: fixed;
                                             tbody {
                                                 tr td {
                                                     padding: 0;
@@ -175,12 +177,21 @@
                                                         .time-area-item {
                                                             background: #224467;
                                                             color: #ffffff;
-                                                            text-align: center;
-                                                            border-radius: 20px;
+                                                            text-align: left;
+                                                            border-radius: 5px;
                                                             font-size: 12px;
                                                             font-weight: bold;
                                                             margin-bottom: 1px;
+                                                            padding: 3px;
                                                             cursor: pointer;
+                                                            & > p{
+                                                                margin: 0;
+                                                                padding: 0;
+                                                                overflow: hidden;
+                                                                text-overflow: ellipsis;
+                                                                white-space: nowrap;
+                                                                word-wrap: normal;
+                                                            }
                                                         }
                                                     }
 
