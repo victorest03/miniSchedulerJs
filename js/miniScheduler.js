@@ -129,6 +129,15 @@ $.fn.extend({
         $mnsBodyMnsTimeArea.find(".mns-scroller").on("scroll", function () {
             $mnsHeadMnsTimeArea.find(".mns-scroller").scrollLeft($(this).scrollLeft());
         });
+
+        $mnsBodyMnsTimeArea.find(".mns-scroller").on("scroll", function () {
+            $mnsBodyMnsResourceArea.find(".mns-scroller").scrollTop($(this).scrollTop());
+        });
+
+        if(parameters.maxHeight){
+            $mnsBodyMnsTimeArea.find(".mns-scroller").css("max-height",parameters.maxHeight);
+            $mnsBodyMnsResourceArea.find(".mns-scroller").css("max-height",parameters.maxHeight);
+        }
         
         $mnsToolbar.find(".btnToday").on("click", function () {
             $mnsloadview.addClass("active");

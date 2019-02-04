@@ -3,6 +3,7 @@ $(function(){
         ajax:{
             url:"/data.json"
         },
+        maxHeight : "200px",
         onClick:function(data){
             console.log(data)
         },

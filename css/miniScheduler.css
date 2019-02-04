@@ -98,10 +98,14 @@
 }
 
 .miniSheduler .mns-container .mns-container-view table thead.mns-head .mns-scroller, .miniSheduler .mns-container .mns-container-view table tbody.mns-body .mns-scroller {
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: auto;
   width: 100%;
   max-width: 100%;
+}
+ 
+.miniSheduler .mns-container .mns-container-view table tbody.mns-body .mns-resource-area .mns-scroller::-webkit-scrollbar {
+  width: 0;
 }
 
 .miniSheduler .mns-container .mns-container-view table thead.mns-head tr th.mns-resource-area {
