@@ -89,7 +89,7 @@
                     }
 
                     .mns-scroller {
-                        overflow-y: hidden;
+                        overflow-y: auto;
                         overflow-x: auto;
                         width: 100%;
                         max-width: 100%;
@@ -205,6 +205,12 @@
                                         }
                                     }
                                 }
+                            }
+                        }
+
+                        td.mns-resource-area{
+                            .mns-scroller::-webkit-scrollbar {
+                                width: 0px;
                             }
                         }
 
